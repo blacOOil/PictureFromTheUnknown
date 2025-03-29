@@ -66,8 +66,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < TaskNumber; i++)
         {
             GameObject newTask = Instantiate(TaskPrefab, TaskPaper.transform);
-            newTask.GetComponent<TaskTarget>().taskname = TasknameTemp;
-            newTask.GetComponent<TaskTarget>().Targetname = TaskTargetTemp;
+            newTask.GetComponent<TaskTarget>().TasknameTemp
             TaskList.Add(newTask);
            
            

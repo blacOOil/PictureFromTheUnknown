@@ -8,17 +8,18 @@ public class InteractiveNPC : MonoBehaviour
     [Header("Talking Type")]
     public TextMeshProUGUI SpekernameText, SpeakingText;
     public string Speakername;
+    public int SpeakingProgress = 0;
     public List<string> Yapping;
 
     [Header("|Player Checker|")]
     public float PlayerCheckerRadius;
-    public GameObject Player,Interacted_Butt,GameManagers;
+    public GameObject Player, Interacted_Butt, GameManagers;
     public Vector3 StartPosition;
     public bool ToggleTalking;
     public string TaskDescription;
 
     [Header("|Player|")]
-    public bool   IsThisAiTaskGiver,Istaskalreadygiven;
+    public bool IsThisAiTaskGiver, IsTaskGiven, Istaskalreadygiven;
     public string TargetTag, taskname;
 
 
@@ -30,6 +31,7 @@ public class InteractiveNPC : MonoBehaviour
         StartPosition = (gameObject.transform.position).normalized;
         Player = GameObject.Find("Player");
         Interacted_Butt.SetActive(false);
+        Istaskalreadygiven = false;
 
         GameObject SpekernameTextobj = GameObject.Find("Speakername");
         SpekernameText = SpekernameTextobj.GetComponent<TextMeshProUGUI>();
@@ -43,7 +45,7 @@ public class InteractiveNPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Player == null) return;
+        if (Player == null) return;
         if (IsplayerClose())
         {
             Vector3 direction = (Player.transform.position - transform.position).normalized;
@@ -52,11 +54,32 @@ public class InteractiveNPC : MonoBehaviour
             Interacted_Butt.SetActive(true);
             if (Input.GetKeyDown(KeyCode.E))
             {
-                ToggleTalking = !ToggleTalking; // Simplified toggle logic
-                Starttalking();
-                GiveTask();
+                if (!ToggleTalking) // If conversation hasn't started
+                {
+                    ToggleTalking = true;
+                    SpeakingProgress = 0; // Ensure we start at the beginning
+                    Starttalking();
+
+                    if (IsThisAiTaskGiver)
+                    {
+                        GiveTask();
+                    }
+                }
+                else // Continue conversation
+                {
+                    if (SpeakingProgress < Yapping.Count - 1)
+                    {
+                        SpeakingProgress++;
+                        Starttalking();
+                    }
+                    else // End conversation
+                    {
+                        SpeakingProgress = 0;
+                        ToggleTalking = false;
+                    }
+                }
             }
-            if (Input.GetMouseButton(0) && Player.GetComponent<CamSwicher>().IsInFPS == true)
+                if (Input.GetMouseButton(0) && Player.GetComponent<CamSwicher>().IsInFPS == true)
             {
                 Interacted_Butt.SetActive(false);
             }
@@ -68,7 +91,7 @@ public class InteractiveNPC : MonoBehaviour
             Interacted_Butt.SetActive(false);
             ToggleTalking = false;
         }
-        if(ToggleTalking == true)
+        if (ToggleTalking == true)
         {
             GameManagers.GetComponent<GameManager>().Istalking = true;
         }
@@ -85,7 +108,7 @@ public class InteractiveNPC : MonoBehaviour
         {
             if (hitCollider.CompareTag(tag))
             {
-                
+
                 return true;
             }
         }
@@ -99,11 +122,18 @@ public class InteractiveNPC : MonoBehaviour
     public void Starttalking()
     {
         SpekernameText.text = Speakername;
-        SpeakingText.text = Yapping[0];
+        SpeakingText.text = Yapping[SpeakingProgress];
     }
     public void GiveTask()
     {
+        if (Istaskalreadygiven == false)
+        {
+            GameManagers.GetComponent<GameManager>().TasknameTemp = taskname;
+            GameManagers.GetComponent<GameManager>().TaskTargetTemp = TargetTag;
+            GameManagers.GetComponent<GameManager>().TaskNumber++;
 
-        GameManagers.GetComponent<GameManager>().TaskNumber++;
+            Istaskalreadygiven = true;
+        }
+
     }
 }

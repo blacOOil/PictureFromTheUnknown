@@ -8,6 +8,5 @@ public class FilmSingle : MonoBehaviour
     public Sprite FilmSprite;
     public float Score;
 
-
 }
 

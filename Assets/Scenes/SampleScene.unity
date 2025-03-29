@@ -2286,6 +2286,8 @@ MonoBehaviour:
   TaskChecklist: {fileID: 1112535355}
   TaskListCleared: 0
   TaskNumber: 0
+  TasknameTemp: 
+  TaskTargetTemp: 
 --- !u!1 &1906194798
 GameObject:
   m_ObjectHideFlags: 0
@@ -2547,31 +2549,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1011526452486647902, guid: 5b608e82478d01b4484b0a290753c4ec, type: 3}
       propertyPath: taskname
-      value: aa
+      value: Shot a Blue Box
       objectReference: {fileID: 0}
     - target: {fileID: 1011526452486647902, guid: 5b608e82478d01b4484b0a290753c4ec, type: 3}
       propertyPath: TargetTag
-      value: aa
+      value: Bluebox
       objectReference: {fileID: 0}
     - target: {fileID: 1011526452486647902, guid: 5b608e82478d01b4484b0a290753c4ec, type: 3}
       propertyPath: Speakername
       value: Mr.F
       objectReference: {fileID: 0}
     - target: {fileID: 1011526452486647902, guid: 5b608e82478d01b4484b0a290753c4ec, type: 3}
+      propertyPath: SpeakingText
+      value: 
+      objectReference: {fileID: 1906194800}
+    - target: {fileID: 1011526452486647902, guid: 5b608e82478d01b4484b0a290753c4ec, type: 3}
+      propertyPath: SpekernameText
+      value: 
+      objectReference: {fileID: 409528972}
+    - target: {fileID: 1011526452486647902, guid: 5b608e82478d01b4484b0a290753c4ec, type: 3}
       propertyPath: IsThisAiTaskGiver
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1011526452486647902, guid: 5b608e82478d01b4484b0a290753c4ec, type: 3}
       propertyPath: Yapping.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1011526452486647902, guid: 5b608e82478d01b4484b0a290753c4ec, type: 3}
       propertyPath: Yapping.Array.data[0]
-      value: wdwe
+      value: Shot a BlueBox
       objectReference: {fileID: 0}
     - target: {fileID: 1011526452486647902, guid: 5b608e82478d01b4484b0a290753c4ec, type: 3}
       propertyPath: Yapping.Array.data[1]
       value: wf3334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1011526452486647902, guid: 5b608e82478d01b4484b0a290753c4ec, type: 3}
+      propertyPath: Yapping.Array.data[2]
+      value: wwe
+      objectReference: {fileID: 0}
+    - target: {fileID: 1011526452486647902, guid: 5b608e82478d01b4484b0a290753c4ec, type: 3}
+      propertyPath: Yapping.Array.data[3]
+      value: wewe
       objectReference: {fileID: 0}
     - target: {fileID: 5802223654511641891, guid: 5b608e82478d01b4484b0a290753c4ec, type: 3}
       propertyPath: m_Name
