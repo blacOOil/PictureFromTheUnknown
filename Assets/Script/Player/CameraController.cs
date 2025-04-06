@@ -16,20 +16,20 @@ public class CameraController : MonoBehaviour
     public float maxFOV = 80f; // Maximum zoom
 
     private Texture2D screenCapture;
-   
-    
-    [Header("Photp Taker")]
-    [SerializeField] private Image PhotoDisplayArea ;
 
-    public GameObject PictureShowcase,GameUi,gameManager,Polaroid;
-    public bool IsShowingPic;
+
+    [Header("Photp Taker")]
+    [SerializeField] private Image PhotoDisplayArea;
+
+    public GameObject PictureShowcase, GameUi, gameManager, Polaroid;
+    public bool IsShowingPic, IsinRedRoom;
     public List<GameObject> WorldUiList;
     public RayCasting RayCasting;
 
     [Header("Film Session")]
     public List<GameObject> filmCaptured;
     public List<Sprite> SpriteList;
-    public float  Filmlimite,CurrentFilmed;
+    public float Filmlimite, CurrentFilmed;
     public Sprite FilmSprited;
     public GameObject FilmPrefab;
 
@@ -45,7 +45,7 @@ public class CameraController : MonoBehaviour
     public void FindWorldUi()
     {
         GameObject[] FoundObjects = GameObject.FindGameObjectsWithTag("WorldUi");
-            WorldUiList.AddRange(FoundObjects); 
+        WorldUiList.AddRange(FoundObjects);
     }
     public void DeactivateAllObjects(List<GameObject> objectList)
     {
@@ -61,7 +61,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         IsHoldCam = movementController.IsInFPS;
         AdjustFocalLength();
         if (!IsHoldCam)
@@ -77,9 +77,9 @@ public class CameraController : MonoBehaviour
         {
             IsShowingPic = false;
         }
-        if(IsShowingPic == false)
+        if (IsShowingPic == false)
         {
-          //  PictureShowcase.SetActive(false);
+            //  PictureShowcase.SetActive(false);
         }
         else
         {
@@ -102,15 +102,15 @@ public class CameraController : MonoBehaviour
         screenCapture.ReadPixels(regionToRead, 0, 0, false);
         screenCapture.Apply();
         GameUi.SetActive(true);
-       // ShowPhoto();
-       
+        // ShowPhoto();
+
     }
     void ShowPhoto()
     {
         Polaroid.SetActive(true);
-        Sprite photoSprite = Sprite.Create(screenCapture, new Rect(0.0f,0.0f,screenCapture.width,screenCapture.height),new Vector2(0.5f,0.5f),100.0f);
+        Sprite photoSprite = Sprite.Create(screenCapture, new Rect(0.0f, 0.0f, screenCapture.width, screenCapture.height), new Vector2(0.5f, 0.5f), 100.0f);
         PhotoDisplayArea.sprite = photoSprite;
-       
+
     }
 
     void AdjustFocalLength()
@@ -131,16 +131,32 @@ public class CameraController : MonoBehaviour
     }
     public void SaveFilming()
     {
-        if(CurrentFilmed != Filmlimite)
+        if (CurrentFilmed != Filmlimite)
         {
             ShowPhoto();
             GameObject SavedPic = Instantiate(FilmPrefab, gameObject.transform.position, Quaternion.identity);
             SavedPic.transform.SetParent(gameObject.transform);
-           
+
             Sprite photoSprite = Sprite.Create(screenCapture, new Rect(0.0f, 0.0f, screenCapture.width, screenCapture.height), new Vector2(0.5f, 0.5f), 100.0f);
             SavedPic.GetComponent<FilmSingle>().FilmSprite = photoSprite;
             filmCaptured.Add(SavedPic);
             CurrentFilmed++;
         }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if ( other.CompareTag("RedRoom")) // or whatever tag you want to check
+        {
+            IsinRedRoom = true;
+        }
+       
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("RedRoom")) // or whatever tag you want to check
+        {
+            IsinRedRoom = false;
+        }
+
     }
 }

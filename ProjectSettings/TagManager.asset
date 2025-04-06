@@ -8,6 +8,7 @@ TagManager:
   - TaskClearing
   - Target
   - NPC
+  - RedRoom
   layers:
   - Default
   - TransparentFX
