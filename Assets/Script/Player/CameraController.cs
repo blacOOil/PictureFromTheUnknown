@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
     public GameObject PictureShowcase, GameUi, gameManager, Polaroid;
     public bool IsShowingPic, IsinRedRoom;
     public List<GameObject> WorldUiList;
-    public RayCasting RayCasting;
+    
 
     [Header("Film Session")]
     public List<GameObject> filmCaptured;
@@ -71,6 +71,10 @@ public class CameraController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && IsHoldCam)
         {
             PhotoCapture();
+            
+        }
+        if (IsinRedRoom)
+        {
             IsShowingPic = true;
         }
         else
@@ -157,6 +161,10 @@ public class CameraController : MonoBehaviour
         {
             IsinRedRoom = false;
         }
+
+    }
+    public void FilmCleaning()
+    {
 
     }
 }
