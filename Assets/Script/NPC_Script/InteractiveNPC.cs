@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class InteractiveNPC : MonoBehaviour
 {
@@ -69,13 +70,16 @@ public class InteractiveNPC : MonoBehaviour
                 {
                     if (SpeakingProgress < Yapping.Count - 1)
                     {
+                     
                         SpeakingProgress++;
                         Starttalking();
                     }
                     else // End conversation
                     {
+
                         SpeakingProgress = 0;
                         ToggleTalking = false;
+                        
                     }
                 }
             }
