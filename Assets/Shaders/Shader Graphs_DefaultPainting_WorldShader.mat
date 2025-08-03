@@ -43,10 +43,10 @@ Material:
     - _BUILTIN_ZWrite: 0
     - _BUILTIN_ZWriteControl: 0
     - _BrushStrokeCount: 0
-    - _size: 0
+    - _size: 1.02
     m_Colors:
     - _Paintedheight: {r: 0, g: 0, b: 0, a: 0}
-    - _PlayerPOS: {r: 0.51, g: 0.6, b: 0, a: 0}
+    - _PlayerPOS: {r: 0.49, g: 0.44, b: 0, a: 0}
     - _Tint: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
