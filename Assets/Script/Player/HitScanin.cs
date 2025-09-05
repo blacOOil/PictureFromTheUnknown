@@ -34,7 +34,7 @@ public class HitScanin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (camSwicher.IsInFPS && (Input.GetMouseButtonDown(0)))
+        if ((camSwicher.Camera_Index == 1) && (Input.GetMouseButtonDown(0)))
         {
             
             if (CheckProximity("DefaultTarget"))

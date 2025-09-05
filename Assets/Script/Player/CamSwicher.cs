@@ -4,44 +4,37 @@ using UnityEngine;
 
 public class CamSwicher : MonoBehaviour
 {
-    public MovementController movementController;
-    public bool IsInFPS = false;
-
     public GameObject FPScam, TPScam;
+    public List<GameObject> Usable_Camera;
+    public int Camera_Index;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Camera_Index = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        movementController.IsInFPS = IsInFPS;
         if (Input.GetKeyDown(KeyCode.V))
         {
+            Camera_Index++;
+            
+             if(Camera_Index + 1 > Usable_Camera.Count)
+            {
+                Camera_Index = 0;
+
+            }
             ToggleCameraChagne();
-        }
-        if (IsInFPS)
-        {
-            FPScam.SetActive(true);
-            TPScam.SetActive(false);
-        }
-        else
-        {
-            FPScam.SetActive(false);
-            TPScam.SetActive(true);
         }
     }
     void ToggleCameraChagne()
     {
-        if (IsInFPS == true)
+
+        for (int i = 0; i < Usable_Camera.Count; i++)
         {
-            IsInFPS = false;
-        }
-        else
-        {
-            IsInFPS = true;
+            bool isActive = (i == Camera_Index);
+            Usable_Camera[i].SetActive(isActive);
         }
     }
 }

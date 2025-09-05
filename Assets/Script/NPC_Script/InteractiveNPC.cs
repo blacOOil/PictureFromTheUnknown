@@ -83,7 +83,7 @@ public class InteractiveNPC : MonoBehaviour
                     }
                 }
             }
-                if (Input.GetMouseButton(0) && Player.GetComponent<CamSwicher>().IsInFPS == true)
+                if (Input.GetMouseButton(0) && Player.GetComponent<CamSwicher>().Camera_Index == 1)
             {
                 Interacted_Butt.SetActive(false);
             }
