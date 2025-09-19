@@ -7,7 +7,6 @@ using Cinemachine;
 public class CameraController : MonoBehaviour
 {
     public CinemachineVirtualCamera virtualCamera;
-    public MovementController movementController;
 
     public bool IsHoldCam = false;
 
@@ -62,7 +61,6 @@ public class CameraController : MonoBehaviour
     void Update()
     {
 
-        IsHoldCam = movementController.IsInFPS;
         AdjustFocalLength();
         if (!IsHoldCam)
         {
