@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.Rendering;
 
 public class InteractiveNPC : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class InteractiveNPC : MonoBehaviour
         GameObject SpekerTextobj = GameObject.Find("TalkingDes");
         SpeakingText = SpekerTextobj.GetComponent<TextMeshProUGUI>();
 
+        Player = GameObject.FindGameObjectWithTag("Player");
 
     }
 
@@ -76,17 +78,12 @@ public class InteractiveNPC : MonoBehaviour
                     }
                     else // End conversation
                     {
-
-                        SpeakingProgress = 0;
-                        ToggleTalking = false;
-                        
+                        Stoptalking();
+                       
                     }
                 }
             }
-                if (Input.GetMouseButton(0) && Player.GetComponent<CamSwicher>().Camera_Index == 1)
-            {
-                Interacted_Butt.SetActive(false);
-            }
+             
         }
         else
         {
@@ -125,8 +122,16 @@ public class InteractiveNPC : MonoBehaviour
 
     public void Starttalking()
     {
+        Player.GetComponent<MovementController>().IsMoveable = false;
         SpekernameText.text = Speakername;
         SpeakingText.text = Yapping[SpeakingProgress];
+
+    }
+    public void Stoptalking()
+    {
+        Player.GetComponent<MovementController>().IsMoveable = true; 
+        SpeakingProgress = 0;
+        ToggleTalking = false;
     }
     public void GiveTask()
     {

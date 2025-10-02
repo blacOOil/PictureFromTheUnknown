@@ -26,7 +26,7 @@ public class MovementController : MonoBehaviour
 
     public float mouseInputDelay = 1000f; // Delay in seconds
 
-
+    public bool IsMoveable;
 
 
     public Vector3 movementDirection()
@@ -57,21 +57,26 @@ public class MovementController : MonoBehaviour
         // Initialize components
         characterController = GetComponent<CharacterController>();
         mainCamera = Camera.main;
+        
 
         
     }
 
     void Update()
     {
-        if (IsInFPS)
+        if (IsMoveable)
         {
-            HandleMouseLook();
+            if (IsInFPS)
+            {
+                HandleMouseLook();
+            }
+            else
+            {
+                Vector3 moveDirection = movementDirection();
+                HandleMovement(moveDirection);
+            }
         }
-        else
-        {
-            Vector3 moveDirection = movementDirection();
-            HandleMovement(moveDirection);
-        }
+       
     }
 
     void HandleMouseLook()

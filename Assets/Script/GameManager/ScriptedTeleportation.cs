@@ -1,12 +1,14 @@
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class ScriptedTeleportation : MonoBehaviour
 {
-    public bool isTrigged = false;
+    public bool isTrigged = true;
     public GameObject Player;
     public Transform TargetTeleport;
+    public float PlayerCheckerRadius;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,25 +20,31 @@ public class ScriptedTeleportation : MonoBehaviour
     {
         if (isTrigged)
         {
-            StartCoroutine(TeleportWithDelay());
+             if (CheckProximity("Player"))
+                {
+                Debug.Log("Hit");
+                StartCoroutine(TeleportWithDelay());
+                }
         }
     }
     private IEnumerator TeleportWithDelay()
     {
-
         Player.transform.position = TargetTeleport.position;
-
         // Optional: double check player reached the target
         yield return new WaitForSeconds(1f); // Wait for 1 second
-
-        isTrigged = false;
     }
-    private void OnTriggerEnter(Collider other)
+    private bool CheckProximity(string tag)
     {
-        if (other.CompareTag("Player"))
+        // Check all layers to capture all objects tagged with the given tag
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, PlayerCheckerRadius);
+        foreach (var hitCollider in hitColliders)
         {
-            isTrigged =true ;
-        }
-    }
+            if (hitCollider.CompareTag(tag))
+            {
 
+                return true;
+            }
+        }
+        return false;
+    }
 }
