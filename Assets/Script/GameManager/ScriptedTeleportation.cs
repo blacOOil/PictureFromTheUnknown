@@ -10,7 +10,7 @@ public class ScriptedTeleportation : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Player = GameObject.Find("Player");        
+      Player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame

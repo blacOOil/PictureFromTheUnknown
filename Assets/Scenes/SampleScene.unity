@@ -409,14 +409,14 @@ Transform:
   m_GameObject: {fileID: 120368571}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -82.89296, y: 165.5362, z: -443.63492}
+  m_LocalPosition: {x: 37.059998, y: 1.1600037, z: -0.5299988}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1394758448}
   - {fileID: 953896974}
   - {fileID: 993571944}
-  m_Father: {fileID: 2123170203}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &120368577
 Rigidbody:
@@ -4978,8 +4978,7 @@ Transform:
   m_LocalPosition: {x: 119.95296, y: -164.37619, z: 443.10492}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 120368575}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2123170204
@@ -5232,6 +5231,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1011526452486647902, guid: 5b608e82478d01b4484b0a290753c4ec, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1806345177}
+    - target: {fileID: 1011526452486647902, guid: 5b608e82478d01b4484b0a290753c4ec, type: 3}
       propertyPath: taskname
       value: Shot a Blue Box
       objectReference: {fileID: 0}
@@ -5243,6 +5246,10 @@ PrefabInstance:
       propertyPath: Speakername
       value: Mr.F
       objectReference: {fileID: 0}
+    - target: {fileID: 1011526452486647902, guid: 5b608e82478d01b4484b0a290753c4ec, type: 3}
+      propertyPath: GameManagers
+      value: 
+      objectReference: {fileID: 1806345177}
     - target: {fileID: 1011526452486647902, guid: 5b608e82478d01b4484b0a290753c4ec, type: 3}
       propertyPath: SpeakingText
       value: 
@@ -5283,6 +5290,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test-NPC
       objectReference: {fileID: 0}
+    - target: {fileID: 5802223654511641891, guid: 5b608e82478d01b4484b0a290753c4ec, type: 3}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
     - target: {fileID: 6053192412196369202, guid: 5b608e82478d01b4484b0a290753c4ec, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -5299,6 +5310,7 @@ SceneRoots:
   - {fileID: 963194228}
   - {fileID: 992101136}
   - {fileID: 1114936459}
+  - {fileID: 120368575}
   - {fileID: 2123170203}
   - {fileID: 1659503529}
   - {fileID: 1806345178}

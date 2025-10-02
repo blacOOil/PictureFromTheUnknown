@@ -30,7 +30,7 @@ public class InteractiveNPC : MonoBehaviour
         ToggleTalking = false;
         GameManagers = GameObject.Find("GameManagers");
         StartPosition = (gameObject.transform.position).normalized;
-        Player = GameObject.Find("Player");
+        
         Interacted_Butt.SetActive(false);
         Istaskalreadygiven = false;
 
