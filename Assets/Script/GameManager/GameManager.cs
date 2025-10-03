@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         {
             TalkingUi.SetActive(true);
         }
-        else
+        else if (Istalking == false)
         {
             TalkingUi.SetActive(false);
         }

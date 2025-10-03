@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour
     public List<GameObject> filmCaptured;
     public List<Sprite> SpriteList;
     public float Filmlimite, CurrentFilmed;
-    public Sprite FilmSprited;
+   
     public GameObject FilmPrefab;
 
     // Start is called before the first frame update
