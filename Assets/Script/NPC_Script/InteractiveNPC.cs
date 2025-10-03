@@ -144,16 +144,25 @@ public class InteractiveNPC : MonoBehaviour
     }
     public void GiveTask()
     {
-        if (Istaskalreadygiven == false)
+        if (!Istaskalreadygiven)
         {
-            GameManagers.GetComponent<GameManager>().TasknameTemp = taskname;
-            GameManagers.GetComponent<GameManager>().TaskTargetTemp = TargetTag;
-            GameManagers.GetComponent<GameManager>().TaskNumber++;
+            var gm = GameManagers.GetComponent<GameManager>();
+
+            // Add a new task to the list
+            gm.TaskDatas.Add(new TaskData
+            {
+                TasknameTemp = taskname,
+                TaskTargetTemp = TargetTag
+            });
+
+            // Update total count
+            gm.TaskNumber = gm.TaskDatas.Count;
 
             Istaskalreadygiven = true;
         }
-
     }
+
+
 }
 
 

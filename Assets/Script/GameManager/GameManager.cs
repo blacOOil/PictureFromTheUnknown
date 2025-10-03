@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class TaskData
+{
+    public string TasknameTemp = "Test", TaskTargetTemp = "Test";
+}
+    public class GameManager : MonoBehaviour
 {
     public GameObject TalkingUi,TaskUI,TaskPrefab,TaskClearerPrefab;
     public bool Istalking,IstoggleESC;
@@ -11,8 +15,8 @@ public class GameManager : MonoBehaviour
 
     private int previousTaskNumber = -1, previousTaskClear = -1;
     private List<GameObject> TaskList,ClearedList;
-    public string TasknameTemp, TaskTargetTemp;
 
+    public List<TaskData> TaskDatas = new List<TaskData>();
     // Start is called before the first frame update
     void Start()
     {
@@ -27,50 +31,47 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Istalking == true)
+        // Talking UI
+        TalkingUi.SetActive(Istalking);
+
+        // ESC menu
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            TalkingUi.SetActive(true);
+            IstoggleESC = !IstoggleESC;
         }
-        else if (Istalking == false)
-        {
-            TalkingUi.SetActive(false);
-        }
-        if (Input.GetKeyDown(KeyCode.Escape)) 
-        {
-            IstoggleESC = !IstoggleESC; 
-        }
-        if(IstoggleESC == true)
-        {
-            TaskUI.SetActive(true);
-        }
-        else
-        {
-            TaskUI.SetActive(false);
-        }
+        TaskUI.SetActive(IstoggleESC);
+
+        // Task spawning
         if (TaskNumber != previousTaskNumber)
         {
-            ClearPreviousTasks();
-            TaskUpdate(); // Call TaskUpdate only when TaskNumber changes
-            previousTaskNumber = TaskNumber; // Update the stored value
+            TaskUpdate();
+            previousTaskNumber = TaskNumber;
         }
+
+        // Cleared tasks
         if (TaskListCleared != previousTaskClear)
         {
             ClearPreviousClear();
             TaskClearUpdate();
             previousTaskClear = TaskListCleared;
         }
-       
     }
+
     public void TaskUpdate()
     {
-        for (int i = 0; i < TaskNumber; i++)
+        // 1. Clear all existing task UI
+        ClearPreviousTasks();
+
+        // 2. Spawn a UI element for each task in TaskDatas
+        for (int i = 0; i < TaskDatas.Count; i++)
         {
+            TaskData task = TaskDatas[i];
+
             GameObject newTask = Instantiate(TaskPrefab, TaskPaper.transform);
-            newTask.GetComponent<TaskTarget>().taskname = TasknameTemp;
-            newTask.GetComponent<TaskTarget>().Targetname = TaskTargetTemp;
+            newTask.GetComponent<TaskTarget>().taskname = task.TasknameTemp;
+            newTask.GetComponent<TaskTarget>().Targetname = task.TaskTargetTemp;
+
             TaskList.Add(newTask);
-           
-           
         }
     }
     public void TaskClearUpdate()
