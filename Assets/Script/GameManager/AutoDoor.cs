@@ -30,12 +30,12 @@ public class AutoDoor : MonoBehaviour
         // Optional: Disable collider when open
         if (Mathf.Abs(Mathf.DeltaAngle(DoorController.eulerAngles.y, openY)) < 1f)
         {
-            GetComponent<MeshRenderer>().enabled = false;
+           
             GetComponent<BoxCollider>().enabled = false;
         }
         else
         {
-            GetComponent<MeshRenderer>().enabled = true;
+          
             GetComponent<BoxCollider>().enabled = true;
         }
     }
