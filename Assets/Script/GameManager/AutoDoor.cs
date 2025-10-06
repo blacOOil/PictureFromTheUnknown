@@ -3,53 +3,56 @@ using UnityEngine;
 public class AutoDoor : MonoBehaviour
 {
     public float PlayerCheckerRadius = 1.2f;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-       
+    public Transform DoorController;
 
-    }
+    public float openY = -90f; // Y rotation when open
+    public float closeY = 0f;  // Y rotation when closed
+    public float speed = 50f;  // Degrees per second
 
-    // Update is called once per frame
+    private bool rotating = false;
+    private float targetY;
+
     void Update()
     {
-        if (IsplayerClosed())
+        if (IsPlayerClose())
         {
-            Opendoor();
+            targetY = openY;
         }
-        else 
+        else
         {
-            Closedoor();   
+            targetY = closeY;
         }
-    }
-    public void Opendoor()
-    {
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
-        gameObject.GetComponent<BoxCollider>().enabled = false;
-    }
-    public void Closedoor()
-    {
 
+        // Rotate toward targetY
+        float newY = Mathf.MoveTowardsAngle(DoorController.eulerAngles.y, targetY, speed * Time.deltaTime);
+        DoorController.eulerAngles = new Vector3(DoorController.eulerAngles.x, newY, DoorController.eulerAngles.z);
+
+        // Optional: Disable collider when open
+        if (Mathf.Abs(Mathf.DeltaAngle(DoorController.eulerAngles.y, openY)) < 1f)
+        {
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<BoxCollider>().enabled = false;
+        }
+        else
+        {
+            GetComponent<MeshRenderer>().enabled = true;
+            GetComponent<BoxCollider>().enabled = true;
+        }
     }
-    public bool IsplayerClosed()
+
+    bool IsPlayerClose()
     {
         return CheckProximity("Player");
     }
-    private bool CheckProximity(string tag)
+
+    bool CheckProximity(string tag)
     {
-        // Check all layers to capture all objects tagged with the given tag
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, PlayerCheckerRadius);
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.CompareTag(tag))
-            {
-
                 return true;
-            }
         }
         return false;
     }
 }
-
-
